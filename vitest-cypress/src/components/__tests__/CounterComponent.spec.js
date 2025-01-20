@@ -26,7 +26,21 @@ describe('Counter', () => {
     expect(wrapper.text()).toContain('Counter: 50')
   })
   describe('Clicks', () => {
-    it('increments counter', () => {})
-    it('decrements counter', () => {})
+    it('increments counter', () => {
+      const wrapper = mountCounter(50)
+      expect(wrapper.find('#counter').text()).toContain('50')
+      const incrementButton = wrapper.findAll('button')[1]
+      expect(incrementButton.text()).toBe('Increment')
+      incrementButton.trigger('click')
+      expect(wrapper.find('#counter').text()).toContain('51')
+    })
+
+    it('decrements counter', () => {
+      const wrapper = mountCounter(50)
+      const decrementButton = wrapper.findAll('button')[0]
+      expect(decrementButton.text()).toBe('Decrement')
+      decrementButton.trigger('click')
+      expect(wrapper.find('#counter').text()).toContain('49')
+    })
   })
 })
